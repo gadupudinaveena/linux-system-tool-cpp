@@ -1,0 +1,66 @@
+#include <iostream>
+#include <fstream>
+#include <cstdlib>   // for system()
+using namespace std;
+
+void listFiles() {
+    cout << "\n--- Files in Current Directory ---\n";
+    system("dir");   // for Windows (use "ls" if Linux)
+}
+
+void showProcesses() {
+    cout << "\n--- Running Processes ---\n";
+    system("tasklist"); // Windows (use "ps -aux" in Linux)
+}
+
+void createFile() {
+    string filename, data;
+
+    cout << "\nEnter file name: ";
+    cin >> filename;
+
+    ofstream file(filename);
+
+    cout << "Enter content: ";
+    cin.ignore();
+    getline(cin, data);
+
+    file << data;
+    file.close();
+
+    cout << "File created successfully!\n";
+}
+
+int main() {
+    int choice;
+
+    do {
+        cout << "\n===== Linux System Tool Menu =====\n";
+        cout << "1. List Files\n";
+        cout << "2. Show Processes\n";
+        cout << "3. Create File\n";
+        cout << "4. Exit\n";
+        cout << "Enter choice: ";
+        cin >> choice;
+
+        switch(choice) {
+            case 1:
+                listFiles();
+                break;
+            case 2:
+                showProcesses();
+                break;
+            case 3:
+                createFile();
+                break;
+            case 4:
+                cout << "Exiting...\n";
+                break;
+            default:
+                cout << "Invalid choice!\n";
+        }
+
+    } while(choice != 4);
+
+    return 0;
+}
